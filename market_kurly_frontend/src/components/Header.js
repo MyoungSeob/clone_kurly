@@ -9,17 +9,17 @@ const Header = (props) => {
         <React.Fragment>
             <Grid padding="10px 30px">
                 <Grid is_flex>
-                    <Grid size="12px">
+                    <Grid size="13px">
                         수도권 이외 지역 <Span>택배배송</Span>
                     </Grid>
                     <Grid flex_end padding="0px 0px 0px 8px">
-                        <Grid flex_end width="60px" size="12px">
+                        <Grid flex_end width="60px" size="13px">
                             회원가입
                         </Grid >
-                        <Grid flex_end width="60px" size="12px">
+                        <Grid flex_end width="60px" size="13px">
                             로그인
                         </Grid>
-                        <Grid flex_end width="60px" size="12px">
+                        <Grid flex_end width="60px" size="13px">
                             고객센터
                         </Grid>
                     </Grid>
@@ -51,6 +51,7 @@ Header.defaultProps = {
 
 const Span = styled.span`
     color: purple;
+    font-weight: bold;
 `
 
 export default Header;
