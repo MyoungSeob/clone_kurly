@@ -26,7 +26,7 @@ const Header = (props) => {
                 </Grid>
                 
                 <div>
-                    로고
+                    로고로고
                 </div>
 
                 <div>
