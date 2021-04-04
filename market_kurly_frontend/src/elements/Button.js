@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"
 
 const Button = (props) => {
-    const {text, size, bold, _onClick, margin, is_float, is_round, children, height, width, padding, color, border, background} = props;
+    const {text, size, bold, _onClick, margin, is_float, children, height, width, padding, color, border, background} = props;
 
     const styles = {
         margin: margin,
@@ -15,17 +15,11 @@ const Button = (props) => {
         bold:bold,
         size:size,
     };
+    
     if(is_float) {
         return (
             <React.Fragment>
                 <FloatButton onClick={_onClick}>{text? text : children}</FloatButton>
-            </React.Fragment>
-        )
-    }
-    if(is_round) {
-        return (
-            <React.Fragment>
-                <RoundButton {...styles} onClick={_onClick}>{text? text : children}</RoundButton>
             </React.Fragment>
         )
     }
@@ -44,33 +38,30 @@ Button.defaultProps = {
     _onClick: () => {},
     margin: false,
     is_float: false,
-    is_round: false,
     height: false,
     width: '100%',
-    padding: false,
-    color: false,
+    padding: "12px 0px",
+    color: "#212121",
     border: false,
-    background: false,
+    background: "#c7f5ff",
     bold: false,
-    size: false,
+    size: '12px',
 }
-const RoundButton = styled.button`
-    ${(props) => (props.bold ? `font-weight: ${props.bold};` : "")}
-    ${(props) => (props.size ? `font-size: ${props.size};` : "")}
-    ${(props) => (props.color ? `color: ${props.color};` : "")}
-    ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
-    ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
-    ${(props) => (props.height ? `height: ${props.height};` : "")}
-    ${(props) => (props.border ? `border: ${props.border}; border-radius: 30px;` : "")}
-
-`
 
 const ElButton = styled.button`
     width: ${(props) => props.width};
     background-color: ${(props) => props.background};
+    &:hover {
+        background-color: #FF384A;
+    }
+    &:active {
+        background-color: #FF384A;
+    }
     
     color: ${(props) => props.color};
-
+    &:hover {
+        color: #ffffff;
+    }
     padding: ${(props) => props.padding};
     font-size: 12px;
     box-sizing: border-box;
