@@ -99,6 +99,9 @@ const Kakao = styled.a`
     text-align : center;
     float : left;
     width : 150px;
+    &: hover {
+      cursor : pointer;
+    }
     
 `
 

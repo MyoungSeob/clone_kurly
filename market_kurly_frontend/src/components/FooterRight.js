@@ -54,6 +54,9 @@ const SiteInfo = styled.a`
     font-size : 14px;
     color : #333;
     line-height : 18px;
+    &: hover {
+      cursor : pointer;
+    }
 `
 const CompanyInfo = styled.div`
 padding : 10px 0;
