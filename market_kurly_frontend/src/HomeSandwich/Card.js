@@ -50,7 +50,6 @@ const CardBody = styled.div`
     float : left;
     position : relative;
     width : 249px;
-    margin-right : 18px;
     height : 506px;
 `
 const TitleDiv = styled.div`
