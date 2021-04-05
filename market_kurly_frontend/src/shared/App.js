@@ -1,6 +1,8 @@
 import './App.css';
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import {ConnectedRouter} from "connected-react-router";
+import {history} from "redux/mokconfigStore";
 import Home from "pages/Home";
 
 
@@ -8,9 +10,9 @@ import Home from "pages/Home";
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <Route path="/" exact component={Home}/>
-      </BrowserRouter>      
+      </ConnectedRouter>      
     </React.Fragment>
   );
 }

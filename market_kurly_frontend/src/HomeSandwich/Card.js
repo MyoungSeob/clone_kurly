@@ -6,28 +6,28 @@ import styled from 'styled-components'
 
 
 const Card = (props) => {
-  const { src, title, sales, price_origin, price_sell } = props;
+  // const { src, title, sales, price_origin, price_sell } = props;
 
   return (
     <React.Fragment>
       <CardBody>
         <ImageDiv>
-          <Image src={props.src}></Image>
+          <Image src={props.main_image_url}></Image>
         </ImageDiv>
         <div>
           <TitleDiv>
-            <Title>{title}</Title>
+            <Title>{props.name}</Title>
           </TitleDiv>
           <div>
             <Sales>
                 <Sale>
-              {sales}
+              {props.discount_percent}%
               </Sale>
-              <span>{price_sell}</span>
+              <span>{props.discounted_price}원</span>
             </Sales>
           </div>
           <div>
-            <Origin>{price_origin}</Origin>
+            <Origin>{props.original_price}원</Origin>
           </div>
         </div>
       </CardBody>
@@ -36,10 +36,12 @@ const Card = (props) => {
 };
 
 Card.defaultProps = {
-    title : "[솔가] 아연 (100일분)",
-    sales : "40%",
-    price_sell : "19,800원",
-    price_origin : "33,000원",
+    id: 0,
+    name: "자른 미역 30g(냉장)",
+    original_price: "1,900",
+    discounted_price: "1,672",
+    discount_percent: "12",
+    main_image_url: "https://img-cf.kurly.com/shop/data/goods/147918052537l0.jpg",
 }
 const ImageDiv = styled.div`
     &: hover {

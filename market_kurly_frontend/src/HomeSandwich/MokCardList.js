@@ -1,35 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Card from 'HomeSandwich/Card';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import {actionCreators as cardActions} from "redux/modules/card";
 
 import {useSelector, useDispatch} from "react-redux";
 
 const MokCardList = (props) => {
-  const dispatch = useDispatch();
-
-  const card_list = useSelector((state) => state.card.list);
+  const card_list = useSelector((state) => state.mokcard.list);
   console.log(card_list);
-
-  const [items, setItems] = useState([]);
-
-  React.useEffect(() => {
-    dispatch(cardActions.loadCardDB())
-  });
-  //   fetch(`http://15.165.205.40/api/recommendations`)
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       console.log(response);
-  //     },
-  //     (error) => {
-  //         console.log(error);
-  //     }
-  //   )
-  // }, []);
-
 
   const settings = {
     dots: false,
@@ -50,10 +30,7 @@ const MokCardList = (props) => {
       <List>
         <StyledSlider {...settings}>
           <div>
-            {/* <Card /> */}
-            {card_list.map((c, idx) => {
-              return <Card key={c.id} {...c}/>
-            })}
+            <Card />
           </div>          
         </StyledSlider>
       </List>
