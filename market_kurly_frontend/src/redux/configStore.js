@@ -8,7 +8,7 @@ import card from "redux/modules/card";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  card: Card,
+  card,
   router: connectRouter(history),
 });
 

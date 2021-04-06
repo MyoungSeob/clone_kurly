@@ -26,7 +26,38 @@ export const loadCardDB = () => {
         fetch("http://15.165.205.40/api/recommendations")
             .then((res) => res.json())
             .then((res) => {
-                console.log(res);
+                const results = res.results;
+
+                let card_list = [];
+                
+                results.forEach((doc) => {
+
+                    let _card = {
+                        ...doc
+                    }
+
+                    let card = {
+                        id: _card.id,
+                        name: _card.name,
+                        original_price: _card.original_price,
+                        discounted_price: _card.discounted_price,
+                        discount_percent: _card.discount_percent,
+                        main_image_url: _card.main_image_url,
+                    };
+                    card_list.push(card);
+                });
+                     
+                console.log(card_list);
+
+                dispatch(setCard(card_list));
+
+                // let _card = {
+
+                // }
+
+                // {results.map((r, idx) => {
+                //     return <Card key={c.id} {...c}/>
+                // })}
                 
             });
     }
@@ -35,6 +66,7 @@ export const loadCardDB = () => {
 export default handleActions(
     {
         [SET_CARD]: (state, action) => produce(state, (draft) => {
+            draft.list = action.payload.card_list;
         }),
     }, initialState
 );

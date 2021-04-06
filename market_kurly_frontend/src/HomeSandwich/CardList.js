@@ -12,23 +12,13 @@ const MokCardList = (props) => {
   const dispatch = useDispatch();
 
   const card_list = useSelector((state) => state.card.list);
-  console.log(card_list);
+  // console.log(card_list);
 
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
 
   React.useEffect(() => {
     dispatch(cardActions.loadCardDB())
-  });
-  //   fetch(`http://15.165.205.40/api/recommendations`)
-  //     .then((response) => response.json())
-  //     .then((response) => {
-  //       console.log(response);
-  //     },
-  //     (error) => {
-  //         console.log(error);
-  //     }
-  //   )
-  // }, []);
+  }, []);
 
 
   const settings = {
@@ -49,12 +39,12 @@ const MokCardList = (props) => {
       </Title>
       <List>
         <StyledSlider {...settings}>
-          <div>
-            {/* <Card /> */}
-            {card_list.map((c, idx) => {
-              return <Card key={c.id} {...c}/>
-            })}
-          </div>          
+        
+          {/* <Card /> */}
+          {card_list.map((c, idx) => {
+            return <div><Card key={c.id} {...c}/></div>
+          })}
+        
         </StyledSlider>
       </List>
     </React.Fragment>
