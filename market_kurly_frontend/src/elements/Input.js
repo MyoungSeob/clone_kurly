@@ -4,12 +4,13 @@ import Grid from "elements/Grid";
 import Text from "elements/Text";
 
 const Input = (props) => {
-    const {label, border, placeholder, _onChange, width, height, type, multiline, value, is_submit, onSubmit} = props;
+    const {label, margin, loginBox, border, placeholder, _onChange, width, height, type, multiline, value, is_submit, onSubmit} = props;
 
     const styles = {
         width: width,
         height: height,
         border: border,
+        margin: margin,
     };
 
     if(multiline){
@@ -20,6 +21,16 @@ const Input = (props) => {
             </Grid>
         )
     }
+
+    if(loginBox){
+        return (
+            <Grid>
+                
+                <ElLoginBox {...styles} value={value} rows={10} placeholder={placeholder} onChange={_onChange}></ElLoginBox>
+            </Grid>
+        )
+    }
+
     return (
         <React.Fragment>
             <Grid>
@@ -33,6 +44,7 @@ const Input = (props) => {
 
 Input.defaultProps = {
     multiline: false,
+    loginBox: false,
     label: false,
     placeholder: '텍스트를 입력해주세요.',
     type: "text",
@@ -41,9 +53,23 @@ Input.defaultProps = {
     width: false,
     height: false,
     border: false,
+    margin: false,
     onSubmit: () => {},
     _onChange: () => {}
 }
+
+const ElLoginBox = styled.input`
+    width: 100%;
+    height: 54px;
+    padding: 0 19px;
+    ${(props) => (props.margin ? `margin: ${props.margin};` : "")}    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    outline: none;
+    letter-spacing: -.05em;
+`
 
 const ElTextarea = styled.textarea`
     border-radius: 6px;

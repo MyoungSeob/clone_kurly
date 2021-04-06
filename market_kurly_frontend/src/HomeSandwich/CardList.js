@@ -12,7 +12,6 @@ const MokCardList = (props) => {
   const dispatch = useDispatch();
 
   const card_list = useSelector((state) => state.card.list);
-  // console.log(card_list);
 
   // const [items, setItems] = useState([]);
 

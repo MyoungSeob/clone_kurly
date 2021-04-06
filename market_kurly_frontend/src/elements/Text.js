@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const Text = (props) => {
 
-    const {bold, color, size, margin, children, center, width, _onClick} = props;
+    const {bold, color, height, size, margin, children, center, width, _onClick} = props;
 
     const styles = {
         bold: bold,
@@ -11,6 +11,7 @@ const Text = (props) => {
         size: size,
         margin:margin,
         center:center,
+        height:height,
         width:width,
     };
 
@@ -29,12 +30,14 @@ Text.defaultProps = {
     margin: false,
     center: false,
     width : false,
+    height : false,
     _onClick: () => {},
 }
 
 const P = styled.p`
     color: ${(props) => props.color};
     width: ${(props) => props.width};
+    height: ${(props) => props.height};
     text-align: ${(props) => props.center};
     font-size: ${(props) => props.size};
     font-weight: ${(props) => (props.bold ? "600" : "400")};
