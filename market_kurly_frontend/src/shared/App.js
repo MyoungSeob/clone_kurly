@@ -5,6 +5,7 @@ import {ConnectedRouter} from "connected-react-router";
 import {history} from "redux/configStore";
 import Home from "pages/Home";
 import Login from "pages/Login";
+import SignUp from 'pages/SignUp';
 
 
 
@@ -14,6 +15,7 @@ function App() {
       <ConnectedRouter history={history}>
         <Route path="/" exact component={Home}/>
         <Route path="/login" exact component={Login}/>
+        <Route path="/signup" exact component={SignUp}/>
       </ConnectedRouter>      
     </React.Fragment>
   );
