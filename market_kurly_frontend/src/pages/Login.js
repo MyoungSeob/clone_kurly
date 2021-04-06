@@ -9,8 +9,26 @@ import styled from "styled-components";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
+import {getLocal, setLocal, deleteLocal} from "shared/Cookie";
+
 const Login = (props) => {
-    
+
+    const [id, setId] = React.useState('');
+    const [pwd, setPwd] = React.useState('');
+
+    const changeId = (e) => {
+        setId(e.target.value);
+    }
+
+    const changePwd = (e) => {
+        setPwd(e.target.value);
+    }
+
+    const login = () => {
+
+        setLocal("name", "mok");
+        setLocal("password", "123");
+    }
 
     return (
         <React.Fragment>
@@ -19,11 +37,11 @@ const Login = (props) => {
             <Grid width="340px" margin="0 auto" padding="90px 0 100px">
                 <Text bold margin="0px auto 34px" size="21px" width="100%" center="center">로그인</Text>
                 
-                <LoginBox placeholder="아이디를 입력해주세요">
+                <LoginBox _onChange={changeId} type="text" placeholder="아이디를 입력해주세요">
                     
                 </LoginBox>
 
-                <LoginBox margin="10px 0 0" placeholder="비밀번호를 입력해주세요">
+                <LoginBox _onChange={changePwd} type="password" margin="10px 0 0" placeholder="비밀번호를 입력해주세요">
                 </LoginBox>
 
                 <Grid is_flex margin="11px 0">
@@ -37,7 +55,7 @@ const Login = (props) => {
                     </Grid>
                 </Grid>
                 <ButtonLogin>
-                    <Text  bold color="#ffffff" size="16.5px" margin="1px 0 0 0">로그인</Text>
+                    <Text onClick={() => {login();}} bold color="#ffffff" size="16.5px" margin="1px 0 0 0">로그인</Text>
                 </ButtonLogin>
                 <ButtonSignup>
                     <Text bold color="#5f0081" size="16px" margin="1px 0 0 0">회원가입</Text>

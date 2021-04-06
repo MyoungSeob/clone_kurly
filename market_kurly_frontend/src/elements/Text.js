@@ -42,6 +42,10 @@ const P = styled.p`
     font-size: ${(props) => props.size};
     font-weight: ${(props) => (props.bold ? "600" : "400")};
     ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
+    &: hover {
+      cursor : pointer;
+      color : #5f0080;
+    }
 `
 
 export default Text;

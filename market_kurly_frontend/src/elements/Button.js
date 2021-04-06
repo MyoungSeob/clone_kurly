@@ -59,8 +59,11 @@ const ElButton = styled.button`
     }
     
     color: ${(props) => props.color};
-    &:hover {
-        color: #ffffff;
+    // &:hover {
+    //     color: #ffffff;
+    // }
+    &: hover {
+      cursor : pointer;
     }
     padding: ${(props) => props.padding};
     font-size: 12px;

@@ -5,10 +5,78 @@ import Input from "elements/Input";
 import Span from "elements/Span";
 import styled from "styled-components"
 
-import { faBars} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Header = (props) => {
+    const [is_login, setIsLogin] = React.useState(false);
+
+    if(is_login){
+        return ( 
+            <React.Fragment>
+                <Grid width="1035px" height="160px" margin="auto">
+                    <Grid is_flex height="33px">
+                        <Grid is_flex size="12px" margin="6px 0 0 0">
+                            <Border>수도권 이외 지역 <Span color="purple" bold>택배배송</Span></Border>
+                        </Grid>
+                        <Grid flex_end padding="0px 0px 0px 8px">
+                            
+                            <Grid flex_center bold width="70px" size="12.4px">
+                                <Text color="#262626" size="12.4px">(로그인) 님</Text>
+                                <Point></Point>
+                            </Grid>
+                            <Grid flex_center bold width="80px" size="12.4px">
+                                <Text color="#262626" size="12.4px">고객센터</Text>
+                                <Point></Point>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    
+                    <Logo></Logo>
+                    
+
+                    <Grid is_flex height="60px" height="70px" margin="62px 0 0">
+                        <Grid flex_start width="450px">
+                            <Grid flex_start size="18px" width="28px" margin="0.5px 2px 0 0">
+                                <Bars></Bars>
+                            </Grid>
+                            <Grid flex_start bold width="130px">
+                                <Text size="16px" bold>전체 카테고리</Text>
+                            </Grid>
+                        </Grid>
+                        <Grid flex_center>
+                            <Grid flex_center width="428px">
+                                <Text size="16px" bold>신상품</Text>
+                            </Grid>
+                            <Grid flex_center>
+                                <Text size="16px" bold>베스트</Text>
+                            </Grid>
+                            <Grid flex_center>
+                                <Text size="16px" bold>알뜰쇼핑</Text>
+                            </Grid>
+                            <Grid flex_center>
+                                <Text size="16px" bold>금주혜택</Text>
+                            </Grid>
+                        </Grid>
+                        
+                        <Grid flex_end>
+                            <Grid width="250px" height="36px">                            
+                                <Input is_submit placeholder="" height="36px"  width="242px" border="0px solid #ffffff">
+                                    
+                                </Input>
+                                <Search></Search>
+                            </Grid>
+                            <Grid flex_center width="40px" margin="0 0 0 14px">
+                                <Map></Map>
+                            </Grid>
+                            <Grid flex_center width="40px" margin="0 0 0 14px">
+                                <Cart></Cart>
+                                
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </React.Fragment>
+        )
+    }
 
     return (
         <React.Fragment>
@@ -22,10 +90,11 @@ const Header = (props) => {
                             <Text bold size="12.4px"><Span color="purple">회원가입</Span></Text>
                         </Grid >
                         <Grid flex_center bold width="62px" size="12.4px">
-                            <Text bold size="12.4px">로그인</Text>
+                            <Text color="#262626" bold size="12.4px">로그인</Text>
                         </Grid>
-                        <Grid flex_center bold width="62px" size="12.4px">
-                            <Text bold size="12.4px">고객센터</Text>
+                        <Grid flex_center bold width="70px" size="12.4px">
+                            <Text color="#262626" bold size="12.4px">고객센터</Text>
+                            <Point></Point>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -35,8 +104,8 @@ const Header = (props) => {
 
                 <Grid is_flex height="60px" height="70px" margin="62px 0 0">
                     <Grid flex_start width="450px">
-                        <Grid flex_start size="18px" width="30px" margin="0.5px 2px 0 0">
-                            <FontAwesomeIcon icon={faBars} />
+                        <Grid flex_start size="18px" width="28px" margin="0.5px 2px 0 0">
+                            <Bars></Bars>
                         </Grid>
                         <Grid flex_start bold width="130px">
                             <Text size="16px" bold>전체 카테고리</Text>
@@ -81,6 +150,16 @@ const Header = (props) => {
 Header.defaultProps = {
 
 }
+// text-decoration: underline;
+const Point = styled.div`
+    
+    width: 8px;
+    height: 5px;
+    margin: 1px 0 0 5px;
+    background-image: url("https://res.kurly.com/pc/ico/1908/ico_down_16x10.png");
+    background-size: 8px 5px;
+    background-position: center;
+`
 
 const Logo = styled.div`
     position: absolute;
@@ -110,6 +189,20 @@ const Logo = styled.div`
 //     background-position: center;
 // `
 
+const Bars = styled.div`
+    width: 16px;
+    height: 14px;
+    margin: 0 0 1px 0;
+    font-size: 16px;
+    background-image: url("https://res.kurly.com/pc/service/common/1908/ico_gnb_all_off_x2.png");
+    background-size: cover;
+    background-position: center;
+    &: hover {
+      cursor : pointer;
+      color : #5f0080;
+    }
+`
+
 const Search = styled.div`
     position: absolute;
     right: 5px;
@@ -120,6 +213,9 @@ const Search = styled.div`
     background-image: url("https://res.kurly.com/pc/service/common/1908/ico_search_x2.png");
     background-size: cover;
     background-position: center;
+    &: hover {
+      cursor : pointer;
+    }
 `
 
 const Map = styled.div`
@@ -128,6 +224,10 @@ const Map = styled.div`
     background-image: url("https://res.kurly.com/pc/ico/2008/ico_delivery_setting.svg?ver=1");
     background-size: cover;
     background-position: center;
+    &: hover {
+      cursor : pointer;
+      color : #5f0080;
+    }
 `
 
 const Cart = styled.div`
@@ -136,6 +236,10 @@ const Cart = styled.div`
     background-image: url("https://res.kurly.com/pc/service/common/2011/ico_cart.svg");
     background-size: cover;
     background-position: center;
+    &: hover {
+      cursor : pointer;
+      color : #5f0080;
+    }
 `
 
 const Border = styled.div`
@@ -147,6 +251,10 @@ const Border = styled.div`
     border: solid 1px #D9D9D9;
     border-radius: 30px;
     color: #5c5c5c;
+    &: hover {
+      cursor : pointer;
+    }
 `
 
 export default Header;
+

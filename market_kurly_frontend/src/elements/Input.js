@@ -62,7 +62,8 @@ const ElLoginBox = styled.input`
     width: 100%;
     height: 54px;
     padding: 0 19px;
-    ${(props) => (props.margin ? `margin: ${props.margin};` : "")}    border: 1px solid #ccc;
+    ${(props) => (props.margin ? `margin: ${props.margin};` : "")}    
+    border: 1px solid #ccc;
     border-radius: 3px;
     background-color: #fff;
     font-size: 14px;
