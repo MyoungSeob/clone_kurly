@@ -4,7 +4,7 @@ import Grid from "elements/Grid";
 import Text from "elements/Text";
 
 const LoginBox = (props) => {
-    const {placeholder, margin} = props;
+    const {placeholder, margin, type, _onChange} = props;
 
     const styles = {
        margin: margin,
@@ -13,7 +13,7 @@ const LoginBox = (props) => {
     return (
         <React.Fragment>
             
-            <ElLoginBox {...styles} placeholder={placeholder}></ElLoginBox>
+            <ElLoginBox {...styles} onChange={_onChange} type={type} placeholder={placeholder}></ElLoginBox>
             
         </React.Fragment>
     )
@@ -22,7 +22,8 @@ const LoginBox = (props) => {
 LoginBox.defaultProps = {
     margin: false,
     placeholder: '텍스트를 입력해주세요.',
-    
+    type : false,
+    _onChange : () => {}
 }
 
 const ElLoginBox = styled.input`

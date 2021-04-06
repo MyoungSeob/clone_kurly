@@ -22,7 +22,7 @@ const MokCardList = (props) => {
 
   const settings = {
     dots: false,
-    arrows : false,
+    arrows : true,
     infinite: false,
     speed: 500,
     slidesToShow: 4,

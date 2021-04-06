@@ -2,9 +2,51 @@ import React from 'react';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import {actionCreators as userActions} from 'redux/modules/user'
+import {history} from 'redux/configStore'
 
 const SignUp = (props) => {
-
+    const dispatch = useDispatch()
+    const [id, setId] = React.useState("");
+    const [pwd, setPwd] = React.useState("");
+    const [check_pwd, setCheckPwd] = React.useState("");
+    const [name, setName] = React.useState("");
+    const signup =()=>{
+        if (id === "" || pwd === "" || check_pwd ==="" || name ==="") {
+            window.alert("위의 내용들을 모두 입력해주세요!")
+            return;
+        }
+        if(pwd !== check_pwd){
+            window.alert("비밀번호와 재입력된 비밀번호가 다릅니다.")
+            return;
+        }
+        dispatch(userActions.signupDB(id, pwd, name));
+        history.push('/')
+        console.log(name)
+    }
+    function check () {
+      fetch('http://15.165.205.40/api/signup/checkid', {
+          method : "POST",
+          body : JSON.stringify({
+            username : id,
+          }),
+          headers : {
+            'Content-Type' : 'application/json',
+            'Accept' : 'application/json',
+          }
+      })
+      .then(res => res.json())
+      .then(res => {
+        if(res.ok){
+          window.alert(res.msg)
+        }else{
+          window.alert(res.msg)
+        }
+      })
+      console.log(123)
+    }
+    
     return (
       <React.Fragment>
         <Header />
@@ -25,9 +67,12 @@ const SignUp = (props) => {
                     type="text"
                     label="아이디"
                     placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
+                    onChange={(e) => {
+                        setId(e.target.value);
+                    }}
                   ></InPut>
                   <span>
-                    <CheckBox>중복확인</CheckBox>
+                    <CheckBox onClick={check}>중복확인</CheckBox>
                   </span>
                 </InputBox>
               </LineBox>
@@ -39,9 +84,12 @@ const SignUp = (props) => {
                 </FirstContents>
                 <InputBox>
                   <InPut
-                    type="text"
+                    type="password"
                     label="비밀번호"
                     placeholder="비밀번호를 입력해주세요."
+                    onChange={(e) => {
+                        setPwd(e.target.value);
+                    }}
                   ></InPut>
                 </InputBox>
               </LineBox>
@@ -53,9 +101,12 @@ const SignUp = (props) => {
                 </FirstContents>
                 <InputBox>
                   <InPut
-                    type="text"
+                    type="password"
                     label="비밀번호"
                     placeholder="비밀번호를 한번 더 입력해주세요."
+                    onChange={(e) => {
+                        setCheckPwd(e.target.value);
+                    }}
                   ></InPut>
                 </InputBox>
               </LineBox>
@@ -70,6 +121,9 @@ const SignUp = (props) => {
                     type="text"
                     label="이름"
                     placeholder="이름을 입력해주세요."
+                    onChange={(e) => {
+                        setName(e.target.value);
+                    }}
                   ></InPut>
                 </InputBox>
               </LineBox>
@@ -77,7 +131,7 @@ const SignUp = (props) => {
           </Table>
           <BR/>
           <ButtonBox>
-          <SignButton>가입하기</SignButton>
+          <SignButton onClick={signup}>가입하기</SignButton>
           </ButtonBox>
         </SignBox>
         <Footer />
@@ -167,6 +221,9 @@ const SignButton = styled.button`
     color : #fff;
     font-weight : 70;
     border-radius : 3px;
+    &: hover {
+        cursor : pointer;
+    }
 `
 const ButtonBox = styled.div`
     text-align : center
