@@ -46,11 +46,6 @@ const CardList = (props) => {
         <StyledSlider {...settings}>        
           {/* <Card /> */}
           {card_list.map((c, idx) => {
-<<<<<<< HEAD
-            return <div onClick={()=>{history.push(`/proddetail/${c.id}`);}}><Card key={c.id} {...c}/></div>
-          })}
-        
-=======
             return (
               <Grid
                 key={c.id}
@@ -62,7 +57,6 @@ const CardList = (props) => {
               </Grid>
             );            
           })}        
->>>>>>> 2c7b30d77f364abea16f6a42325687a1774c8a76
         </StyledSlider>
       </List>
     </React.Fragment>
