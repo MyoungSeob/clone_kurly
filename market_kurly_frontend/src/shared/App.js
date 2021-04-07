@@ -6,6 +6,7 @@ import {history} from "redux/configStore";
 import Home from "pages/Home";
 import Login from "pages/Login";
 import SignUp from 'pages/SignUp';
+import ProdDetail from 'pages/ProdDetail'
 
 
 
@@ -16,7 +17,9 @@ function App() {
         <Route path="/" exact component={Home}/>
         <Route path="/login" exact component={Login}/>
         <Route path="/signup" exact component={SignUp}/>
-      </ConnectedRouter>      
+        <Route path="/proddetail" exact component={ProdDetail}/>
+        <Route path="/proddetail/:id" exact component={ProdDetail}/>
+      </ConnectedRouter>     
     </React.Fragment>
   );
 }

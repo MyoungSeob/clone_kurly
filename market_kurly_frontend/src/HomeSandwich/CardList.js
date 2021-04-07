@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from 'HomeSandwich/Card';
+import Grid from 'elements/Grid'
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import {actionCreators as cardActions} from "redux/modules/card";
+import {history} from "redux/configStore";
+import {useHistory} from "react-router"
 
 import {useSelector, useDispatch} from "react-redux";
 
-const MokCardList = (props) => {
+const CardList = (props) => {
+  const history = useHistory()
   const dispatch = useDispatch();
 
   const card_list = useSelector((state) => state.card.list);
@@ -37,13 +41,20 @@ const MokCardList = (props) => {
         </H>
       </Title>
       <List>
-        <StyledSlider {...settings}>
-        
+        <StyledSlider {...settings}>        
           {/* <Card /> */}
           {card_list.map((c, idx) => {
-            return <div><Card key={c.id} {...c}/></div>
-          })}
-        
+            return (
+              <Grid
+                key={c.id}
+                _onClick={() => {
+                  history.push(`/proddetail/${c.id}`);
+                }}
+              >
+                <Card key={c.id} {...c} />
+              </Grid>
+            );            
+          })}        
         </StyledSlider>
       </List>
     </React.Fragment>
@@ -77,4 +88,4 @@ const Span = styled.span`
     position : relative;
     font-weight : 700;
 `
-export default MokCardList;
+export default CardList;

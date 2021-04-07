@@ -24,7 +24,6 @@ const Login = (props) => {
         // setCookie("user_id", "perl", 3);
         // setCookie("user_pwd", "pppp", 3);
         dispatch(userActions.loginDB(id, pwd));
-        history.push('/')
     }
 
     return (

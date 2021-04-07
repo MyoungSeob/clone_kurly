@@ -1,8 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import { produce } from "immer";
 
-이명섭
-
 
 const SET_USER = "SET_USER"
 const GET_USER = "GET_USER"
@@ -16,7 +14,7 @@ const initialState = {
 }
 
 const signupDB = (id, pwd, name) => {
-    return function (dispatch, {history}) {
+    return function (dispatch, getState, { history }) {
         fetch('http://15.165.205.40/api/signup', {
             
             method : "POST",
@@ -34,12 +32,12 @@ const signupDB = (id, pwd, name) => {
         .then(res => {
             console.log(res)
         })
-        
+    history.push('/') 
     }
 }
 
 const loginDB = (id, pwd) => {
-    return function(dispatch, {history}) {
+    return function(dispatch, getState, { history }) {
         fetch('http://15.165.205.40/api/login', {
             method : "POST",
             headers : {
@@ -59,7 +57,7 @@ const loginDB = (id, pwd) => {
                 window.alert(res.msg)
             }
         })
-        
+    history.push('/');  
     }
 }
 
