@@ -22,7 +22,6 @@ const SignUp = (props) => {
             return;
         }
         dispatch(userActions.signupDB(id, pwd, name));
-        history.push('/')
         console.log(name)
     }
     function check () {

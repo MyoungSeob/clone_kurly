@@ -24,11 +24,17 @@ const Login = (props) => {
 
     const login = () => {
         // console.log(getCookie('user_id'))
+<<<<<<< HEAD
         setLocal("username", "mok");
         setLocal("password", "123");
         // dispatch(userActions.loginDB(id, pwd));
         // history.push('/')
 
+=======
+        // setCookie("user_id", "perl", 3);
+        // setCookie("user_pwd", "pppp", 3);
+        dispatch(userActions.loginDB(id, pwd));
+>>>>>>> 2c7b30d77f364abea16f6a42325687a1774c8a76
     }
 
     return (

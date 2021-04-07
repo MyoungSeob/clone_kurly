@@ -27,7 +27,7 @@ display : block;
 margin : 0 auto;
 background-position : 50% 50%;
 background-size : cover;
-width : 249px;
-height : 320px;
+width : ${(props) => props.width};
+height : ${(props) => props.height};
 `
 export default Image;
