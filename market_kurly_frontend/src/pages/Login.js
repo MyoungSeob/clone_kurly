@@ -5,29 +5,30 @@ import Text from "elements/Text";
 import Input from "elements/Input";
 import LoginBox from "elements/LoginBox";
 import styled from "styled-components";
+import {history} from "redux/configStore"
 
 import Header from "components/Header";
 import Footer from "components/Footer";
+import { getCookie, setCookie } from "shared/Cookie";
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from 'redux/modules/user'
 
 import {getLocal, setLocal, deleteLocal} from "shared/Cookie";
 
 const Login = (props) => {
 
-    const [id, setId] = React.useState('');
-    const [pwd, setPwd] = React.useState('');
+    const dispatch = useDispatch();
 
-    const changeId = (e) => {
-        setId(e.target.value);
-    }
-
-    const changePwd = (e) => {
-        setPwd(e.target.value);
-    }
+    const [id, setId] = React.useState("");
+    const [pwd, setPwd] = React.useState("");
 
     const login = () => {
-
-        setLocal("name", "mok");
+        // console.log(getCookie('user_id'))
+        setLocal("username", "mok");
         setLocal("password", "123");
+        // dispatch(userActions.loginDB(id, pwd));
+        // history.push('/')
+
     }
 
     return (
@@ -36,12 +37,11 @@ const Login = (props) => {
      
             <Grid width="340px" margin="0 auto" padding="90px 0 100px">
                 <Text bold margin="0px auto 34px" size="21px" width="100%" center="center">로그인</Text>
-                
-                <LoginBox _onChange={changeId} type="text" placeholder="아이디를 입력해주세요">
-                    
+
+                <LoginBox _onChange={(e) => {setId(e.target.value)}} placeholder="아이디를 입력해주세요">             
                 </LoginBox>
 
-                <LoginBox _onChange={changePwd} type="password" margin="10px 0 0" placeholder="비밀번호를 입력해주세요">
+                <LoginBox _onChange={(e) => {setPwd(e.target.value)}} placeholder="비밀번호를 입력해주세요">
                 </LoginBox>
 
                 <Grid is_flex margin="11px 0">
@@ -54,8 +54,9 @@ const Login = (props) => {
                         <Text color="#4f4f4f" bold size="13px" margin="0 0 0 4px">| 비밀번호 찾기</Text>
                     </Grid>
                 </Grid>
-                <ButtonLogin>
-                    <Text onClick={() => {login();}} bold color="#ffffff" size="16.5px" margin="1px 0 0 0">로그인</Text>
+
+                <ButtonLogin onClick={()=>{login()}}>
+                    <Text  bold color="#ffffff" size="16.5px" margin="1px 0 0 0">로그인</Text>
                 </ButtonLogin>
                 <ButtonSignup>
                     <Text bold color="#5f0081" size="16px" margin="1px 0 0 0">회원가입</Text>

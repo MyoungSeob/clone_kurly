@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const Text = (props) => {
 
-    const {bold, color, height, size, margin, children, center, width, _onClick} = props;
+    const {bold, hover, color, menuBar, height, size, margin, children, center, width, _onClick} = props;
 
     const styles = {
         bold: bold,
@@ -13,7 +13,16 @@ const Text = (props) => {
         center:center,
         height:height,
         width:width,
+        hover:hover,
     };
+
+    if(menuBar){
+        return (
+            <P2 {...styles} onClick={_onClick}>
+                {children}
+            </P2>
+        )
+    }
 
     return (
         <P {...styles} onClick={_onClick}>
@@ -31,10 +40,28 @@ Text.defaultProps = {
     center: false,
     width : false,
     height : false,
+    menuBar: false,
+    hover: false,
     _onClick: () => {},
 }
 
 const P = styled.p`
+    color: ${(props) => props.color};
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+    text-align: ${(props) => props.center};
+    font-size: ${(props) => props.size};
+    font-weight: ${(props) => (props.bold ? "600" : "400")};
+    ${(props) => (props.margin ? `margin: ${props.margin}` : '')};
+    &: hover { cursor: ${(props) => props.hover}; }
+    ${(props) => 
+        props.is_flex
+            ? `{ cursor : pointer; }`
+            : ""}
+    
+`
+
+const P2 = styled.p`
     color: ${(props) => props.color};
     width: ${(props) => props.width};
     height: ${(props) => props.height};

@@ -1,13 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Grid from "elements/Grid";
 import Text from "elements/Text";
 import Input from "elements/Input";
 import Span from "elements/Span";
 import styled from "styled-components"
 
+import {getLocal, setLocal, deleteLocal} from "shared/Cookie";
 
 const Header = (props) => {
     const [is_login, setIsLogin] = React.useState(false);
+
+    React.useEffect(() => {
+        let local = getLocal("username");
+        console.log(local);
+
+        if(local){
+            setIsLogin(true);
+        } else {
+            setIsLogin(false);
+        }
+    });
 
     if(is_login){
         return ( 
@@ -20,11 +32,11 @@ const Header = (props) => {
                         <Grid flex_end padding="0px 0px 0px 8px">
                             
                             <Grid flex_center bold width="70px" size="12.4px">
-                                <Text color="#262626" size="12.4px">(로그인) 님</Text>
+                                <Text hover="pointer" color="#262626" size="12.4px">(로그인) 님</Text>
                                 <Point></Point>
                             </Grid>
                             <Grid flex_center bold width="80px" size="12.4px">
-                                <Text color="#262626" size="12.4px">고객센터</Text>
+                                <Text hover="pointer" color="#262626" size="12.4px">고객센터</Text>
                                 <Point></Point>
                             </Grid>
                         </Grid>
@@ -39,21 +51,21 @@ const Header = (props) => {
                                 <Bars></Bars>
                             </Grid>
                             <Grid flex_start bold width="130px">
-                                <Text size="16px" bold>전체 카테고리</Text>
+                                <Text menuBar size="16px" bold>전체 카테고리</Text>
                             </Grid>
                         </Grid>
                         <Grid flex_center>
                             <Grid flex_center width="428px">
-                                <Text size="16px" bold>신상품</Text>
+                                <Text menuBar size="16px" bold>신상품</Text>
                             </Grid>
                             <Grid flex_center>
-                                <Text size="16px" bold>베스트</Text>
+                                <Text menuBar size="16px" bold>베스트</Text>
                             </Grid>
                             <Grid flex_center>
-                                <Text size="16px" bold>알뜰쇼핑</Text>
+                                <Text menuBar size="16px" bold>알뜰쇼핑</Text>
                             </Grid>
                             <Grid flex_center>
-                                <Text size="16px" bold>금주혜택</Text>
+                                <Text menuBar size="16px" bold>금주혜택</Text>
                             </Grid>
                         </Grid>
                         
@@ -87,13 +99,13 @@ const Header = (props) => {
                     </Grid>
                     <Grid flex_end padding="0px 0px 0px 8px">
                         <Grid flex_center bold width="62px" size="12.4px">
-                            <Text bold size="12.4px"><Span color="purple">회원가입</Span></Text>
+                            <Text hover="pointer" bold size="12.4px"><Span color="purple">회원가입</Span></Text>
                         </Grid >
                         <Grid flex_center bold width="62px" size="12.4px">
-                            <Text color="#262626" bold size="12.4px">로그인</Text>
+                            <Text hover="pointer" color="#262626" bold size="12.4px">로그인</Text>
                         </Grid>
                         <Grid flex_center bold width="70px" size="12.4px">
-                            <Text color="#262626" bold size="12.4px">고객센터</Text>
+                            <Text hover="pointer" color="#262626" bold size="12.4px">고객센터</Text>
                             <Point></Point>
                         </Grid>
                     </Grid>
@@ -108,21 +120,21 @@ const Header = (props) => {
                             <Bars></Bars>
                         </Grid>
                         <Grid flex_start bold width="130px">
-                            <Text size="16px" bold>전체 카테고리</Text>
+                            <Text menuBar size="16px" bold>전체 카테고리</Text>
                         </Grid>
                     </Grid>
                     <Grid flex_center>
                         <Grid flex_center width="428px">
-                            <Text size="16px" bold>신상품</Text>
+                            <Text menuBar size="16px" bold>신상품</Text>
                         </Grid>
                         <Grid flex_center>
-                            <Text size="16px" bold>베스트</Text>
+                            <Text menuBar size="16px" bold>베스트</Text>
                         </Grid>
                         <Grid flex_center>
-                            <Text size="16px" bold>알뜰쇼핑</Text>
+                            <Text menuBar size="16px" bold>알뜰쇼핑</Text>
                         </Grid>
                         <Grid flex_center>
-                            <Text size="16px" bold>금주혜택</Text>
+                            <Text menuBar size="16px" bold>금주혜택</Text>
                         </Grid>
                     </Grid>
                     

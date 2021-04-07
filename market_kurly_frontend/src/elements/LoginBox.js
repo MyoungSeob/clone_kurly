@@ -22,8 +22,8 @@ const LoginBox = (props) => {
 LoginBox.defaultProps = {
     margin: false,
     placeholder: '텍스트를 입력해주세요.',
-    type: "text",
-    _onChange: () => {},
+    type : false,
+    _onChange : () => {}
 }
 
 const ElLoginBox = styled.input`

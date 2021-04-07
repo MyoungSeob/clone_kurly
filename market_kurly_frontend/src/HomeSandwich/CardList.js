@@ -7,9 +7,11 @@ import "slick-carousel/slick/slick-theme.css";
 import {actionCreators as cardActions} from "redux/modules/card";
 
 import {useSelector, useDispatch} from "react-redux";
+import { useHistory } from "react-router";
 
 const MokCardList = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const card_list = useSelector((state) => state.card.list);
 
@@ -22,7 +24,7 @@ const MokCardList = (props) => {
 
   const settings = {
     dots: false,
-    arrows : false,
+    arrows : true,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
@@ -41,7 +43,7 @@ const MokCardList = (props) => {
         
           {/* <Card /> */}
           {card_list.map((c, idx) => {
-            return <div><Card key={c.id} {...c}/></div>
+            return <div onClick={()=>{history.push(`/proddetail/${c.id}`);}}><Card key={c.id} {...c}/></div>
           })}
         
         </StyledSlider>
