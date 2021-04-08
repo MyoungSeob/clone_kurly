@@ -10,10 +10,10 @@ import {actionCreators as prodActions} from 'redux/modules/prod';
 
 const ProdDetail =(props)=>{
 
-const id = props.match.params.id;
-console.log(id)
+  const id = props.match.params.id;
+  console.log(id)
 
-// console.log(prod_res[0])
+  // console.log(prod_res[0])
 
     const dispatch = useDispatch();
 
