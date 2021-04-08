@@ -7,23 +7,23 @@ import Image from 'elements/Image';
 const ProdInfo =(props)=>{
     
     const [number, setNumber] = useState(1);
-    const [price, setPrice] = useState(12320);
-    const [point, setPoint] = useState(616);
-    const onePrice = 12320;
-    const onePoint = 616;
+    // const [price, setPrice] = useState(12320);
+    // const [point, setPoint] = useState(616);
+    // const onePrice = 12320;
+    // const onePoint = 616;
     
 
     const plus = () => {
         setNumber(number + 1);
-        setPrice(price + onePrice);
-        setPoint(point + onePoint);
+        // setPrice(price + onePrice);
+        // setPoint(point + onePoint);
         
     }
 
     const minus = () => {
         setNumber(number > 0? number - 1 : 0);
-        setPrice(price > 0? price - onePrice : 0);
-        setPoint(point > 0? point - onePoint : 0);
+        // setPrice(price > 0? price - onePrice : 0);
+        // setPoint(point > 0? point - onePoint : 0);
         
     }
     const {contactant, expiration_date, extended_infos, guides} = props;
