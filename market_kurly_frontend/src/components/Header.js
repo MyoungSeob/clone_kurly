@@ -6,21 +6,23 @@ import Span from "elements/Span";
 import styled from "styled-components"
 
 import {getLocal, setLocal, deleteLocal} from "shared/Cookie";
+import { history } from "redux/configStore";
+import { useSelector } from "react-redux";
 
 const Header = (props) => {
-    const [is_login, setIsLogin] = React.useState(false);
 
-    React.useEffect(() => {
-        let local = getLocal("username");
+    const is_login = localStorage.getItem('is_login')
 
-        if(local){
-            setIsLogin(true);
-        } else {
-            setIsLogin(false);
-        }
-    });
+    const name = localStorage.getItem('name')
 
-    if(is_login){
+    const has_token = localStorage.getItem("X-AUTH-TOKEN")
+
+    function logout(){
+        localStorage.clear()
+        history.replace('/')
+    }
+
+    if(has_token){
         return ( 
             <React.Fragment>
                 <Grid width="1035px" height="160px" margin="auto">
@@ -31,19 +33,16 @@ const Header = (props) => {
                         <Grid flex_end padding="0px 0px 0px 8px">
                             
                             <Grid flex_center bold width="70px" size="12.4px">
-                                <Text hover="pointer" color="#262626" size="12.4px">(로그인) 님</Text>
+                                <Text hover="pointer" color="#262626" size="12.4px">{name} 님</Text>
                                 <Point></Point>
                             </Grid>
                             <Grid flex_center bold width="80px" size="12.4px">
-                                <Text hover="pointer" color="#262626" size="12.4px">고객센터</Text>
+                                <Text _onClick={logout} hover="pointer" color="#262626" size="12.4px">로그아웃</Text>
                                 <Point></Point>
                             </Grid>
                         </Grid>
                     </Grid>
-                    
-                    <Logo></Logo>
-                    
-
+                    <Logo onClick={() => {history.push('/')}}/>          
                     <Grid is_flex height="60px" height="70px" margin="62px 0 0">
                         <Grid flex_start width="450px">
                             <Grid flex_start size="18px" width="28px" margin="0.5px 2px 0 0">
@@ -98,10 +97,10 @@ const Header = (props) => {
                     </Grid>
                     <Grid flex_end padding="0px 0px 0px 8px">
                         <Grid flex_center bold width="62px" size="12.4px">
-                            <Text hover="pointer" bold size="12.4px"><Span color="purple">회원가입</Span></Text>
+                            <Text _onClick={() => {history.push('/signup')}}hover="pointer" bold size="12.4px"><Span color="purple">회원가입</Span></Text>
                         </Grid >
                         <Grid flex_center bold width="62px" size="12.4px">
-                            <Text hover="pointer" color="#262626" bold size="12.4px">로그인</Text>
+                            <Text _onClick={() => {history.push('/login')}} hover="pointer" color="#262626" bold size="12.4px">로그인</Text>
                         </Grid>
                         <Grid flex_center bold width="70px" size="12.4px">
                             <Text hover="pointer" color="#262626" bold size="12.4px">고객센터</Text>
@@ -110,7 +109,7 @@ const Header = (props) => {
                     </Grid>
                 </Grid>
                 
-                <Logo></Logo>
+                <Logo onClick={() => {history.push('/')}}></Logo>
                 
 
                 <Grid is_flex height="60px" height="70px" margin="62px 0 0">

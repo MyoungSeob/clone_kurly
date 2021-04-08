@@ -1,22 +1,26 @@
 import {createAction, handleActions} from "redux-actions";
 import { produce } from "immer";
 import { useHistory } from "react-router";
+import {setLocal, getLocal, deleteLocal} from 'shared/Cookie'
 
 
-const SET_USER = "SET_USER"
-const GET_USER = "GET_USER"
+const LOG_IN = "LOG_IN";
+const GET_USER = "GET_USER";
+const LOG_OUT = "LOG_OUT";
 
-const setUser = createAction(SET_USER, (user) => ({user}));
+const logIn = createAction(LOG_IN, (log_name, user) => ({log_name, user}));
 const getUser = createAction(GET_USER, (user) => ({user}));
+const logOut = createAction(LOG_OUT, (user) => ({user}));
 
 const initialState = {
     user : null,
     is_login : false,
+    log_name : null,
 }
 
 const signupDB = (id, pwd, name) => {
     
-    return function (dispatch, {history}) {
+    return function (dispatch, getState, {history}) {
         fetch('http://15.165.205.40/api/signup', {
             
             method : "POST",
@@ -39,7 +43,7 @@ const signupDB = (id, pwd, name) => {
 }
 
 const loginDB = (id, pwd) => {
-    return function(dispatch, {history}) {
+    return function(dispatch, getState, {history}) {
         fetch('http://15.165.205.40/api/login', {
             method : "POST",
             headers : {
@@ -54,26 +58,38 @@ const loginDB = (id, pwd) => {
         .then(res => res.json())
         .then(res => {
             if(res.token){
-                localStorage.setItem("test-token", res.token)
+                localStorage.setItem("X-AUTH-TOKEN", res.token)
+                localStorage.setItem("name", res.name)
+                dispatch(logIn(res.name))
+                history.push('/')
+                console.log(localStorage.getItem("X-AUTH-TOKEN"))
             }else{
                 window.alert(res.msg)
             }
         })
-        history.push('/') 
+         
     }
 }
 
 
-export default handleActions({
-    [SET_USER] : (state, action) => produce(state, (draft) => {
+export default handleActions(
+  {
+    [LOG_IN]: (state, action) =>
+      produce(state, (draft) => {
+        localStorage.setItem("is_login", "success");
+        draft.log_name = action.payload.log_name;
         draft.user = action.payload.user;
-    })
-},initialState
+        
+        draft.is_login = true;
+      }),
+  },
+  initialState
 );
 
 const actionCreators = {
     signupDB,
     loginDB,
+    logIn,
 }
 
 export {actionCreators}

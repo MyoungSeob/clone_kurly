@@ -24,10 +24,13 @@ const Login = (props) => {
 
     const login = () => {
         // console.log(getCookie('user_id'))
-        setLocal("username", "mok");
-        setLocal("password", "123");
-        // dispatch(userActions.loginDB(id, pwd));
+        if(id === "" || pwd ==="") {
+            window.alert("아이디와 비밀번호를 입력해주세요.")
+            return;
+        }else{
+        dispatch(userActions.loginDB(id, pwd));}
         // history.push('/')
+
     }
 
     return (
@@ -40,7 +43,7 @@ const Login = (props) => {
                 <LoginBox _onChange={(e) => {setId(e.target.value)}} placeholder="아이디를 입력해주세요">             
                 </LoginBox>
 
-                <LoginBox _onChange={(e) => {setPwd(e.target.value)}} placeholder="비밀번호를 입력해주세요">
+                <LoginBox type="password" _onChange={(e) => {setPwd(e.target.value)}} placeholder="비밀번호를 입력해주세요">
                 </LoginBox>
 
                 <Grid is_flex margin="11px 0">
@@ -57,7 +60,7 @@ const Login = (props) => {
                 <ButtonLogin onClick={()=>{login()}}>
                     <Text  bold color="#ffffff" size="16.5px" margin="1px 0 0 0">로그인</Text>
                 </ButtonLogin>
-                <ButtonSignup>
+                <ButtonSignup onClick={() => {history.push('/signup')}}>
                     <Text bold color="#5f0081" size="16px" margin="1px 0 0 0">회원가입</Text>
                 </ButtonSignup>
                 
@@ -75,7 +78,9 @@ const ButtonSignup = styled.button`
     border-radius: 3px;
     border: 1px solid #5f0081;
     background-color: #ffffff;
-    
+    &: hover {
+        cursor : pointer;
+    }
 `;
 
 const ButtonLogin = styled.button`
@@ -85,7 +90,9 @@ const ButtonLogin = styled.button`
     border-radius: 3px;
     border: 1px solid #5f0081;
     background-color: #5f0080;
-    
+    &: hover {
+        cursor : pointer;
+    }
 `;
 
 const Check = styled.input`
