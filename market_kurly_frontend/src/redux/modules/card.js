@@ -4,8 +4,10 @@ import {produce} from "immer";
 // Actions
 const SET_CARD = "SET_CARD";
 
+
 // Action Creators
 const setCard = createAction(SET_CARD, (card_list) => ({card_list}));
+
 
 const initialState = {
     list: [],
@@ -63,17 +65,21 @@ export const loadCardDB = () => {
     }
 }
 
+
 export default handleActions(
     {
         [SET_CARD]: (state, action) => produce(state, (draft) => {
             draft.list = action.payload.card_list;
         }),
+
     }, initialState
 );
 
 const actionCreators = {
     setCard,
+
     loadCardDB,
+
 };
 
 export { actionCreators };

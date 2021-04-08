@@ -11,7 +11,7 @@ import {actionCreators as prodActions} from 'redux/modules/prod';
 const ProdDetail =(props)=>{
 
 const id = props.match.params.id;
-console.log(id)
+
 
 // console.log(prod_res[0])
 
@@ -22,7 +22,7 @@ console.log(id)
     React.useEffect(() => {
         dispatch(prodActions.loadProdDB(id))
     }, [])
-    console.log(prod_list)
+  
 
 
     // const _prod_list = prod_list[0] 

@@ -4,34 +4,33 @@ import Text from "elements/Text";
 import styled from 'styled-components';
 import Image from 'elements/Image';
 import Permit from "shared/Permit";
+import {actionCreators as prodActions} from 'redux/modules/cart_'
+import { useDispatch, useSelector } from "react-redux";
 
 const ProdInfo =(props)=>{
-    
+    const dispatch = useDispatch();
+    const addProd = useSelector((state) => state.cart_.list)
     const [number, setNumber] = useState(1);
-    // const [price, setPrice] = useState(12320);
-    // const [point, setPoint] = useState(616);
-    // const onePrice = 12320;
-    // const onePoint = 616;
-    
+    const _id = props.id;
     const has_token = localStorage.getItem("X-AUTH-TOKEN")
-
+    console.log(_id)
     const plus = () => {
         setNumber(number + 1);
-        // setPrice(price + onePrice);
-        // setPoint(point + onePoint);
-        
     }
 
     const minus = () => {
-        setNumber(number > 0? number - 1 : 0);
-        // setPrice(price > 0? price - onePrice : 0);
-        // setPoint(point > 0? point - onePoint : 0);
-        
+        setNumber(number > 0? number - 1 : 0);        
     }
+
     const {contactant, expiration_date, extended_infos, guides} = props;
     
     const regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi
    
+    function addCart() {
+      dispatch(prodActions.postProdsDB(_id, number))
+    }
+   
+
     return (
       <React.Fragment>
         <Container>
@@ -225,7 +224,7 @@ const ProdInfo =(props)=>{
                     <ExepectPoint>로그인 후, 회원할인가와 적립혜택 제공</ExepectPoint>
                 )}
               </Grid>
-              <BtnOrder>장바구니 담기</BtnOrder>
+              <BtnOrder onClick={addCart}>장바구니 담기</BtnOrder>
             </Grid>
           </FloatR>
         </Container>

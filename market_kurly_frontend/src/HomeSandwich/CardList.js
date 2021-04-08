@@ -27,7 +27,7 @@ const CardList = (props) => {
 
 
   const settings = {
-    dots: false,
+    dots: true,
     arrows : true,
     infinite: false,
     speed: 500,
