@@ -3,6 +3,7 @@ import Grid from "elements/Grid";
 import Text from "elements/Text";
 import styled from 'styled-components';
 import Image from 'elements/Image';
+import Permit from "shared/Permit";
 
 const ProdInfo =(props)=>{
     
@@ -12,6 +13,7 @@ const ProdInfo =(props)=>{
     const onePrice = 12320;
     const onePoint = 616;
     
+    const has_token = localStorage.getItem("X-AUTH-TOKEN")
 
     const plus = () => {
         setNumber(number + 1);
@@ -34,119 +36,194 @@ const ProdInfo =(props)=>{
       <React.Fragment>
         <Container>
           <FloatL>
-            <Image width="430px" height="552px" src={props.main_image_url}></Image>
+            <Image
+              width="430px"
+              height="552px"
+              src={props.main_image_url}
+            ></Image>
           </FloatL>
           <FloatR>
-            
-              <ProdNameBox>
-                <ProdName>{props.name}</ProdName>
-                <ProdDesc>{props.short_description}</ProdDesc>
-              </ProdNameBox>
-              <PriceBox>
+            <ProdNameBox>
+              <ProdName>{props.name}</ProdName>
+              <ProdDesc>{props.short_description}</ProdDesc>
+            </ProdNameBox>
+            <PriceBox>
+              <Permit>
                 <UserDis>회원할인가</UserDis>
-                <DisPrice>{props.discounted_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</DisPrice>
-                <Won>원</Won>
-                <DisPercent>{props.discount_percent}%</DisPercent>
-                <OriginBox>
-                  <OrgPrice>{props.original_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</OrgPrice>
-                </OriginBox>
+              </Permit>
+              <DisPrice>
+                {props.discounted_price
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </DisPrice>
+              <Won>원</Won>
+              <DisPercent>{props.discount_percent}%</DisPercent>
+              <OriginBox>
+                <OrgPrice>
+                  {props.original_price
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  원
+                </OrgPrice>
+              </OriginBox>
+              {has_token ? (
                 <ExepectP>
-                  개당 <Point>{props.expected_point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원 적립</Point>
+                  개당{" "}
+                  <Point>
+                    {props.expected_point
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    원 적립
+                  </Point>
                 </ExepectP>
-              </PriceBox>
+              ) : (
+                <ExepectPLog>
+                  로그인 후, 회원할인가와 적립혜택이 제공됩니다.
+                </ExepectPLog>
+              )}
+            </PriceBox>
             <Grid width="570px" padding="20px 0 0 11px">
-              
-              <Grid borderBottom=" 1px solid #eee" padding="10px 0 10px" >
-                  <Grid flex_start height="36px" padding="10px 0 0">
-                      <Text width="150px" color="#666">판매단위</Text>
-                      <Text width="420px" color="#333">{props.unit_text}</Text>
-                  </Grid>
-                  <Grid flex_start height="36px">
-                      <Text width="150px" color="#666">중량/용량</Text>
-                      <Text width="420px" color="#333">{props.weight}</Text>
-                  </Grid>
+              <Grid borderBottom=" 1px solid #eee" padding="10px 0 10px">
+                <Grid flex_start height="36px" padding="10px 0 0">
+                  <Text width="150px" color="#666">
+                    판매단위
+                  </Text>
+                  <Text width="420px" color="#333">
+                    {props.unit_text}
+                  </Text>
+                </Grid>
+                <Grid flex_start height="36px">
+                  <Text width="150px" color="#666">
+                    중량/용량
+                  </Text>
+                  <Text width="420px" color="#333">
+                    {props.weight}
+                  </Text>
+                </Grid>
               </Grid>
-              
-              <Grid borderBottom=" 1px solid #eee" padding="10px 0" >
-                  <Grid flex_start height="36px">
-                      <Text width="150px" color="#666">배송구분</Text>
-                      <Text width="420px" color="#333">{props.delivery_time_type_text}</Text>
-                  </Grid>
+
+              <Grid borderBottom=" 1px solid #eee" padding="10px 0">
+                <Grid flex_start height="36px">
+                  <Text width="150px" color="#666">
+                    배송구분
+                  </Text>
+                  <Text width="420px" color="#333">
+                    {props.delivery_time_type_text}
+                  </Text>
+                </Grid>
               </Grid>
-              <Grid borderBottom=" 1px solid #eee" padding="10px 0" >
-                  <Grid flex_start height="36px">
-                      <Text width="150px" color="#666">포장타입</Text>
-                      <Text width="420px" color="#333">{props.packing_type_text}</Text>
-                      {/* <Text color="#666" size="12px">택배배송은 에코포장이 스티로폼으로 대체됩니다.</Text> */}
-                  </Grid>
+              <Grid borderBottom=" 1px solid #eee" padding="10px 0">
+                <Grid flex_start height="36px">
+                  <Text width="150px" color="#666">
+                    포장타입
+                  </Text>
+                  <Text width="420px" color="#333">
+                    {props.packing_type_text}
+                  </Text>
+                  {/* <Text color="#666" size="12px">택배배송은 에코포장이 스티로폼으로 대체됩니다.</Text> */}
+                </Grid>
               </Grid>
               {contactant ? (
-                <Grid borderBottom=" 1px solid #eee" padding="4px 0" >
-                    <Grid flex_start height="100%" >
-                        <Text width="150px" color="#666">알레르기정보</Text>
-                        <Text width="420px" color="#333">{props.contactant.replaceAll('<br />','')}</Text>
-                    </Grid>
-                </Grid>
-              ) : (
-                ""
-              )}
-
-              {expiration_date ? (
-                <Grid borderBottom=" 1px solid #eee" padding="10px 0" >
-                    <Grid flex_start height="36px">
-                        <Text width="150px" color="#666">유통기한</Text>
-                        <Text width="420px" color="#333">{props.expiration_date}</Text>
-                    </Grid>
-                </Grid>
-              ) : (
-                ""
-              )}
-
-              {extended_infos != '[]' && extended_infos ? (
-                <Grid borderBottom=" 1px solid #eee" padding="10px 0" >
-                    <Grid flex_start height="36px">
-                        <Text width="150px" color="#666" margin="0">유통기한</Text>
-                        <Text width="420px" color="#333" margin="0">{props.extended_infos.split(':')[1].replace(regExp,'')}</Text>
-                    </Grid>
-                </Grid>
-              ) : (
-                ""
-              )}
-              
-              {guides != '[]' && guides ? (
-                <Grid borderBottom=" 1px solid #eee" padding="16px 0" height="100%">
-                    <Grid flex_start height="100%">
-                        <Text width="150px" color="#666">안내사항</Text>
-                        <Grid width="420px" padding="0" >
-                            <Text width="420px" color="#333" margin="0 0 0 8px">{"- "+props.guides.replace(regExp,'')}</Text>
-                            
-                        </Grid>
-                    </Grid>
-                </Grid>
-              ) : (
-                ""
-              )}
-              
-              
-              
-              <Grid borderBottom=" 1px solid #eee" padding="10px 0" >
-                  <Grid flex_start height="36px">
-                      <Text width="150px" color="#666">구매수량</Text>
-                      <SpanBox>
-                          <BtnMinus onClick={minus}></BtnMinus>
-                          <InputBox >{number}</InputBox>
-                          <BtnPlus onClick={plus}></BtnPlus>
-                      </SpanBox>
+                <Grid borderBottom=" 1px solid #eee" padding="4px 0">
+                  <Grid flex_start height="100%">
+                    <Text width="150px" color="#666">
+                      알레르기정보
+                    </Text>
+                    <Text width="420px" color="#333">
+                      {props.contactant.replaceAll("<br />", "")}
+                    </Text>
                   </Grid>
+                </Grid>
+              ) : (
+                ""
+              )}
+              {expiration_date ? (
+                <Grid borderBottom=" 1px solid #eee" padding="10px 0">
+                  <Grid flex_start height="36px">
+                    <Text width="150px" color="#666">
+                      유통기한
+                    </Text>
+                    <Text width="420px" color="#333">
+                      {props.expiration_date}
+                    </Text>
+                  </Grid>
+                </Grid>
+              ) : (
+                ""
+              )}
+              {extended_infos != "[]" && extended_infos ? (
+                <Grid borderBottom=" 1px solid #eee" padding="10px 0">
+                  <Grid flex_start height="36px">
+                    <Text width="150px" color="#666" margin="0">
+                      유통기한
+                    </Text>
+                    <Text width="420px" color="#333" margin="0">
+                      {props.extended_infos.split(":")[1].replace(regExp, "")}
+                    </Text>
+                  </Grid>
+                </Grid>
+              ) : (
+                ""
+              )}
+              {guides != "[]" && guides ? (
+                <Grid
+                  borderBottom=" 1px solid #eee"
+                  padding="16px 0"
+                  height="100%"
+                >
+                  <Grid flex_start height="100%">
+                    <Text width="150px" color="#666">
+                      안내사항
+                    </Text>
+                    <Grid width="420px" padding="0">
+                      <Text width="420px" color="#333" margin="0 0 0 8px">
+                        {"- " + props.guides.replace(regExp, "")}
+                      </Text>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              ) : (
+                ""
+              )}
+
+              <Grid borderBottom=" 1px solid #eee" padding="10px 0">
+                <Grid flex_start height="36px">
+                  <Text width="150px" color="#666">
+                    구매수량
+                  </Text>
+                  <SpanBox>
+                    <BtnMinus onClick={minus}></BtnMinus>
+                    <InputBox>{number}</InputBox>
+                    <BtnPlus onClick={plus}></BtnPlus>
+                  </SpanBox>
+                </Grid>
               </Grid>
               <TotalPrice>
-                  <Text bold size="13px" margin="0 10px 0 0">총 상품금액 :</Text>
-                  <Text bold size="30px" margin="0" height="33px">{(number*props.discounted_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
-                  <Text bold size="16px" margin="0 4px 0 4px" width="10px">원</Text>
+                <Text bold size="13px" margin="0 10px 0 0">
+                  총 상품금액 :
+                </Text>
+                <Text bold size="30px" margin="0" height="33px">
+                  {(number * props.discounted_price)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                </Text>
+                <Text bold size="16px" margin="0 4px 0 4px" width="10px">
+                  원
+                </Text>
               </TotalPrice>
-              
+
               <Grid flex_end margin="0 8px 0 0">
-                  <Text>구매 시 {(number*props.expected_point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원 적립</Text>
+                {has_token ? (
+                    <Text>
+                    구매 시{" "}
+                    {(number * props.expected_point)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    원 적립
+                  </Text>
+                ) : (
+                    <ExepectPoint>로그인 후, 회원할인가와 적립혜택 제공</ExepectPoint>
+                )}
               </Grid>
               <BtnOrder>장바구니 담기</BtnOrder>
             </Grid>
@@ -255,6 +332,14 @@ const ExepectP = styled.span`
     line-height : 18px;
     border-bottom: 1px solid #eee;
 `
+const ExepectPLog = styled.span`
+    display : block;
+    padding-top : 7px;
+    font-size : 14px;
+    color : #5f0080;
+    line-height : 20px;
+    letter-spacing : 0;
+`
 const Point = styled.strong`
     font-weight : 700;
 `
@@ -302,6 +387,13 @@ const InputBox = styled.p`
     text-shadow: none;
     display: inline;
     cursor: text;
+`
+const ExepectPoint = styled.span`
+    display : block;
+    font-size : 14px;
+    color : #666;
+    line-height : 20px;
+    text-align : right;
 `
 
 const SpanBox = styled.button`
