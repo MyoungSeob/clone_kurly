@@ -38,7 +38,7 @@ const signupDB = (id, pwd, name) => {
         .then(res => {
             console.log(res)
         })
-        history.push('/') 
+        history.push('/login') 
     }
 }
 

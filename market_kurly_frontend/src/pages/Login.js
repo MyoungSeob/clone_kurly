@@ -40,7 +40,7 @@ const Login = (props) => {
             <Grid width="340px" margin="0 auto" padding="90px 0 100px">
                 <Text bold margin="0px auto 34px" size="21px" width="100%" center="center">로그인</Text>
 
-                <LoginBox _onChange={(e) => {setId(e.target.value)}} placeholder="아이디를 입력해주세요">             
+                <LoginBox margin="0 0 10px 0" _onChange={(e) => {setId(e.target.value)}} placeholder="아이디를 입력해주세요">             
                 </LoginBox>
 
                 <LoginBox type="password" _onChange={(e) => {setPwd(e.target.value)}} placeholder="비밀번호를 입력해주세요">
