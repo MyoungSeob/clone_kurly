@@ -19,7 +19,11 @@ const CartList = (props) => {
     React.useEffect(() => {
         dispatch(cartActions.loadProdDB())
     }, [])
-    console.log(prod_list)
+    // console.log(prod_list)
+
+    const pric = prod_list.map((p) => p.product.original_price);
+    const sum =pric.reduce((a,b)=>a+b,0);
+    const total_price = sum + 3000;
 
     return (
         <React.Fragment>
@@ -53,19 +57,22 @@ const CartList = (props) => {
                         <Grid bg="#fafafa" padding="9px 18px 18px 20px" width="100%" height="226px" borderBottom="1px solid #f2f2f2" borderLeft="1px solid #f2f2f2" borderRight="1px solid #f2f2f2">
                             <Grid is_flex height="40px" padding="9px 0 0">
                                 <Text size="16px" >상품금액</Text>
-                                <Text size="16px" >12,123원</Text>
+                                <Text size="16px" >{sum.toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
                             </Grid>
                             <Grid is_flex height="40px" padding="9px 0 0">
                                 <Text size="16px" >상품할인금액</Text>
-                                <Text size="16px" >2,123원</Text>
+                                <Text size="16px" >0원</Text>
                             </Grid>
                             <Grid is_flex height="40px" padding="9px 0 0">
                                 <Text size="16px" margin="0">배송비</Text>
-                                <Text size="16px" margin="0">2,500원</Text>
+                                <Text size="16px" margin="0">+3,000원</Text>
+                                {/* {sum  '리액트' ? <h1>리액트입니다.</h1> : <h1>리액트가 아닙니다</h1>} */}
                             </Grid>
                             <Grid is_flex height="40px" padding="30px 0 0" margin="20px 0 0" borderTop="1px solid #f2f2f2">
                                 <Text size="16px" >결제예정금액</Text>
-                                <Text size="16px" bold>12,123원</Text>
+                                <Text size="16px" bold>{total_price.toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
                             </Grid>
                         </Grid>
                         <BtnOrder>

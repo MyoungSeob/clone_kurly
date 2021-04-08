@@ -78,7 +78,7 @@ const Header = (props) => {
                                 <Map></Map>
                             </Grid>
                             <Grid flex_center width="40px" margin="0 0 0 14px">
-                                <Cart></Cart>
+                                <Cart onClick={() => {history.push('/cart')}}/>
                                 
                             </Grid>
                         </Grid>
@@ -147,7 +147,7 @@ const Header = (props) => {
                             <Map></Map>
                         </Grid>
                         <Grid flex_center width="40px" margin="0 0 0 14px">
-                            <Cart></Cart>
+                            <Cart onClick={() => {history.push('/cart')}}/>
                             
                         </Grid>
                     </Grid>
