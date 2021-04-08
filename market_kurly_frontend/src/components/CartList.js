@@ -3,8 +3,23 @@ import styled from "styled-components"
 import Grid from "elements/Grid";
 import Text from "elements/Text";
 import CartListProduct from "components/CartListProduct";
+import {history} from "redux/configStore";
+import {useHistory} from "react-router"
+import { useSelector, useDispatch } from 'react-redux';
+import {actionCreators as cartActions} from 'redux/modules/cart';
+import cart from 'redux/modules/cart';
 
 const CartList = (props) => {
+    // const id = props.match.params.id;
+
+    const dispatch = useDispatch();
+
+    const prod_list = useSelector((state) => state.cart.list)
+
+    React.useEffect(() => {
+        dispatch(cartActions.loadProdDB())
+    }, [])
+    console.log(prod_list)
 
     return (
         <React.Fragment>
@@ -13,12 +28,15 @@ const CartList = (props) => {
                     <Text bold size="28px">장바구니</Text>
                 </Grid>
 
-                <Grid is_flex align="center">
-                    <Grid flex_center width="720px" borderBottom="1px solid #f2f2f2" borderTop="1px solid #f2f2f2">
+                <Grid align>
+                    <Grid width="720px" borderBottom="1px solid #f2f2f2" borderTop="1px solid #f2f2f2">
                         {/* <Text  padding="115px 0" margin="0" size="16px" color="#333" bold>
                             장바구니에 담긴 상품이 없습니다
                         </Text> */}
-                        <CartListProduct></CartListProduct>
+                        {prod_list.map((p, idx) => {
+                            return <CartListProduct key={p.id} {...p} />;
+                        })}
+                        {/* <CartListProduct {...prod_list}></CartListProduct> */}
                     </Grid>
                     <Grid width="290px" >
                         <Grid padding="23px 19px 20px" width="100%" height="200px" borderBottom="1px solid #f2f2f2" borderTop="1px solid #f2f2f2" borderLeft="1px solid #f2f2f2" borderRight="1px solid #f2f2f2">

@@ -2,11 +2,14 @@ import React, {useState} from "react";
 import styled from "styled-components"
 import Grid from "elements/Grid";
 import Text from "elements/Text";
+import Image from "elements/Image";
+import {history} from "redux/configStore";
+import {actionCreators as cartActions} from 'redux/modules/cart';
 
 
 const CartListProduct = (props) => {
 
-    
+    // const {id, nums, product} = props;
 
     const [number, setNumber] = useState(1);
     const [price, setPrice] = useState(12320);
@@ -31,27 +34,48 @@ const CartListProduct = (props) => {
 
     return (
         <React.Fragment>
-            <Grid is_flex width="100%" minHeight="128px">
+            <Grid is_flex width="100%" minHeight="128px" borderTop="1px solid #949494">
                 <Grid flex_start>
                     
                     <BtnCheck ></BtnCheck>
-                    <Img></Img>
-                    <Text bold size="15px">[KF365] DOLE 실속 바나나 1.1kg</Text>
+                    <Image src={props.product.main_image_url} img></Image>
+                    <Text bold size="15px">{props.product.name}</Text>
                 </Grid>
                 
                 <Grid flex_end>
                     <SpanBox>
                         <BtnMinus onClick={minus}></BtnMinus>
-                        <InputBox >{number}</InputBox>
+                        <InputBox >{props.nums}</InputBox>
                         <BtnPlus onClick={plus}></BtnPlus>
                     </SpanBox>
-                    <Text center="right" size="16px" bold width="76px">12,123원</Text>
+                    <Text center="right" size="16px" bold width="76px">{props.product.original_price}원</Text>
                     <Del></Del>
                 </Grid>
             </Grid>
         </React.Fragment>
     )
 }
+
+CartListProduct.defaultProps = {
+    id: null,
+    product: {
+        id: "",
+        title: "",
+        sales: "",
+        priceSell: "",
+        priceOrigin: "",
+        img: "",
+        unit: "",
+        weight: "",
+        delivery: "",
+        con_origin: "",
+        pack: "",
+        info: "",
+        nums: "",
+        category: "",
+    },
+    nums: "",
+};
 
 
 const BtnCheck = styled.button`
@@ -77,26 +101,7 @@ const BtnCheck = styled.button`
 
 `
 
-const Img = styled.div`
-    width: 60px;
-    height: 78px;
-    max-width: 100%;
-    display: inline-block;
-    text-align: center;
-    text-transform: none;
-    background-image: url("https://img-cf.kurly.com/shop/data/goods/1542967126271i0.jpg");
-    background-size: cover;
-    background-position: center;
-    background-color: #fff;
-    border: 0;
-    outline: 0;
-    box-sizing: border-box;
-    margin: 0 20px 0 0;
-    padding: 0;
-    &: hover {
-      cursor : pointer;
-    }
-`
+
 
 const Del = styled.div`
     width: 30px;
