@@ -10,10 +10,10 @@ import {history} from "redux/configStore";
 import {useHistory} from "react-router"
 
 import {useSelector, useDispatch} from "react-redux";
-import { useHistory } from "react-router";
+
 
 const CardList = (props) => {
-  const history = useHistory()
+  
   const dispatch = useDispatch();
   const history = useHistory();
 

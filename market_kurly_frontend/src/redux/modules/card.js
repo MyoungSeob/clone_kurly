@@ -47,7 +47,7 @@ export const loadCardDB = () => {
                     card_list.push(card);
                 });
                      
-                console.log(card_list);
+                // console.log(card_list);
 
                 dispatch(setCard(card_list));
 

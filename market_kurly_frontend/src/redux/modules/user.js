@@ -1,5 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import { produce } from "immer";
+import { useHistory } from "react-router";
 
 
 const SET_USER = "SET_USER"
@@ -14,6 +15,7 @@ const initialState = {
 }
 
 const signupDB = (id, pwd, name) => {
+    
     return function (dispatch, {history}) {
         fetch('http://15.165.205.40/api/signup', {
             
@@ -32,7 +34,7 @@ const signupDB = (id, pwd, name) => {
         .then(res => {
             console.log(res)
         })
-        
+        history.push('/') 
     }
 }
 
@@ -57,7 +59,7 @@ const loginDB = (id, pwd) => {
                 window.alert(res.msg)
             }
         })
-        
+        history.push('/') 
     }
 }
 

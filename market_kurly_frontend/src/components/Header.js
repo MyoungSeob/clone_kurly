@@ -12,7 +12,6 @@ const Header = (props) => {
 
     React.useEffect(() => {
         let local = getLocal("username");
-        console.log(local);
 
         if(local){
             setIsLogin(true);

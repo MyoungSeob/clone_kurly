@@ -38,6 +38,15 @@ const ProdDetail = (props) => {
                         <Text width="420px" color="#333">1000ml</Text>
                     </Grid>
                 </Grid>
+                <Grid borderBottom=" 1px solid #eee" padding="10px 0" height="100%">
+                    <Grid flex_start >
+                        <Text width="150px" color="#666">배송구분</Text>
+                        <Grid width="420px">
+                            <Text width="420px" color="#333" margin="0">샛별배송/택배배송</Text>
+                            
+                        </Grid>
+                    </Grid>
+                </Grid>
                 <Grid borderBottom=" 1px solid #eee" padding="10px 0" >
                     <Grid flex_start height="36px">
                         <Text width="150px" color="#666">배송구분</Text>
