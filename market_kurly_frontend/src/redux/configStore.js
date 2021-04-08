@@ -8,11 +8,12 @@ import prod from "redux/modules/prod";
 import user from "redux/modules/user";
 import cart_ from "redux/modules/cart_"
 import ad from "redux/modules/ad"
+import cart from "redux/modules/cart"
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  card,prod,user,cart_,ad,
+  card,prod,user,cart_,ad,cart,
   router: connectRouter(history),
 });
 

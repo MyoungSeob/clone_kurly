@@ -18,8 +18,24 @@ const Header = (props) => {
     const has_token = localStorage.getItem("X-AUTH-TOKEN")
 
     function logout(){
-        localStorage.clear()
+        fetch("http://15.165.205.40/api/carts/products", {
+            method : "PUT",
+            headers : {
+                "X-AUTH-TOKEN" : localStorage.getItem("X-AUTH-TOKEN"),
+                'Content-Type' : 'application/json',
+            },
+            body : localStorage.getItem("cart"),
+        })
+        .then(res => console.log(res))
+
+        localStorage.clear()       
         history.replace('/')
+        
+    }
+
+    function pushCart() {
+        history.push('/cart');
+        window.location.reload()
     }
 
     if(has_token){
@@ -77,7 +93,7 @@ const Header = (props) => {
                             <Grid flex_center width="40px" margin="0 0 0 14px">
                                 <Map></Map>
                             </Grid>
-                            <Grid flex_center width="40px" margin="0 0 0 14px">
+                            <Grid _onClick={pushCart} flex_center width="40px" margin="0 0 0 14px">
                                 <Cart></Cart>
                                 
                             </Grid>
@@ -146,7 +162,7 @@ const Header = (props) => {
                         <Grid flex_center width="40px" margin="0 0 0 14px">
                             <Map></Map>
                         </Grid>
-                        <Grid flex_center width="40px" margin="0 0 0 14px">
+                        <Grid _onClick={pushCart} flex_center width="40px" margin="0 0 0 14px">
                             <Cart></Cart>
                             
                         </Grid>

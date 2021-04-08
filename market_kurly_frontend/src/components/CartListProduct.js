@@ -1,55 +1,94 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import styled from "styled-components"
 import Grid from "elements/Grid";
 import Text from "elements/Text";
 import Image from "elements/Image";
 import {history} from "redux/configStore";
+import { useSelector, useDispatch } from 'react-redux';
 import {actionCreators as cartActions} from 'redux/modules/cart';
 
 
 const CartListProduct = (props) => {
 
-    // const {id, nums, product} = props;
-
-    const [number, setNumber] = useState(1);
-    const [price, setPrice] = useState(12320);
-    const [point, setPoint] = useState(616);
-    const onePrice = 12320;
-    const onePoint = 616;
-    
+   const dispatch = useDispatch();
+    const [number, setNumber] = useState(`${props.nums}`);
+    const cart_info = {
+        id : props.id,
+        nums : number,
+    }
+    const _id = props.id;
+    const cart_nn = [];
 
     const plus = () => {
-        setNumber(number + 1);
-        setPrice(price + onePrice);
-        setPoint(point + onePoint);
-        
+
+        const cart_cart = JSON.parse(localStorage.getItem("cart"))
+
+        console.log(cart_cart)
+        console.log(typeof(cart_cart))
+
+        // localStorage.removeItem("cart")
+        // cart_nn.push(cart_info)
+        let num = parseInt(number) + 1;
+        setNumber(num);
+        // localStorage.setItem("cart_", JSON.stringify(cart_info))
+        // const aaaa = localStorage.getItem("cart_")
+        // console.log(JSON.stringify(aaaa))
+        // cart_nn.push(cart_info)
+
+        for (var i = 0; i < cart_cart.length; i++)
+        {
+          if (cart_cart[i]["id"] == _id) {
+            cart_cart[i]["nums"] = num;
+           
+          }
+        }
+        localStorage.setItem("cart", JSON.stringify(cart_cart))
     }
+
+    
+
+
+
+console.log(props.id)
 
     const minus = () => {
         setNumber(number > 0? number - 1 : 0);
-        setPrice(price > 0? price - onePrice : 0);
-        setPoint(point > 0? point - onePoint : 0);
-        
+        const cart_cart = JSON.parse(localStorage.getItem("cart"))
+        for (var i = 0; i < cart_cart.length; i++)
+        {
+          if (cart_cart[i]["id"] == _id) {
+            cart_cart[i]["nums"] = number;
+           
+          }
+        }
+        localStorage.setItem("cart", JSON.stringify(cart_cart))
     }
 
+    
+    console.log(number)
     return (
         <React.Fragment>
             <Grid is_flex width="100%" minHeight="128px" borderTop="1px solid #949494">
                 <Grid flex_start>
                     
                     <BtnCheck ></BtnCheck>
-                    <Image src={props.product.main_image_url} img></Image>
+                    <Image src={props.product.main_image_url} img_></Image>
                     <Text bold size="15px">{props.product.name}</Text>
                 </Grid>
                 
                 <Grid flex_end>
                     <SpanBox>
                         <BtnMinus onClick={minus}></BtnMinus>
-                        <InputBox >{props.nums}</InputBox>
+                        <InputBox >{number}</InputBox>
                         <BtnPlus onClick={plus}></BtnPlus>
                     </SpanBox>
-                    <Text center="right" size="16px" bold width="76px">{props.product.original_price}원</Text>
-                    <Del></Del>
+                    <Text center="right" size="16px" bold width="82px">{(number * props.product.original_price).toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
+                   <Del onClick={(e)=>{
+                        e.preventDefault();
+                        e.stopPropagation();
+                        dispatch(cartActions.deleteProdDB(props.id))
+                    }}></Del>
                 </Grid>
             </Grid>
         </React.Fragment>
@@ -103,7 +142,7 @@ const BtnCheck = styled.button`
 
 
 
-const Del = styled.div`
+const Del = styled.button`
     width: 30px;
     height: 30px;
     max-width: 100%;
