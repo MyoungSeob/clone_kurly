@@ -1,3 +1,5 @@
+// 장바구니에 들어가는 상품컴포넌트 입니다!
+
 import React from "react";
 import styled from "styled-components"
 import Grid from "elements/Grid";
@@ -10,7 +12,6 @@ import {actionCreators as cartActions} from 'redux/modules/cart';
 import cart from 'redux/modules/cart';
 
 const CartList = (props) => {
-    // const id = props.match.params.id;
 
     const dispatch = useDispatch();
 
@@ -19,8 +20,7 @@ const CartList = (props) => {
     React.useEffect(() => {
         dispatch(cartActions.loadProdDB())
     }, [])
-    // console.log(prod_list)
-
+    
     const price = prod_list.map((p) => p.product.original_price);
     const sum =price.reduce((a,b)=>a+b,0);
     const total_price = sum + 3000;
@@ -95,6 +95,7 @@ const CartList = (props) => {
                   <Text size="16px">상품금액</Text>
                   <Text size="16px">
                     {sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
+                    {/* 상품금액을 불러오고, 1,000과 같이 3번째 자리에 쉼표(',')를 넣어줘요! */}
                   </Text>
                 </Grid>
                 <Grid is_flex height="40px" padding="9px 0 0">

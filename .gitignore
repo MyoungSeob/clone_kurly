@@ -1,0 +1,7 @@
+market_kurly_frontend/data.json
+market_kurly_frontend/package-lock.json
+market_kurly_frontend/public/data/data.json
+market_kurly_frontend/src/elements/NextArrow.js
+market_kurly_frontend/src/elements/PreArrow.js
+market_kurly_frontend/src/redux/mokconfigStore.js
+market_kurly_frontend/user.json

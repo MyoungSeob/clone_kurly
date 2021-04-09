@@ -1,3 +1,5 @@
+//카드 (메인페이지 화면 상품목록) 불러오기
+
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
 
@@ -48,19 +50,7 @@ export const loadCardDB = () => {
                     };
                     card_list.push(card);
                 });
-                     
-                // console.log(card_list);
-
-                dispatch(setCard(card_list));
-
-                // let _card = {
-
-                // }
-
-                // {results.map((r, idx) => {
-                //     return <Card key={c.id} {...c}/>
-                // })}
-                
+                dispatch(setCard(card_list));                
             });
     }
 }

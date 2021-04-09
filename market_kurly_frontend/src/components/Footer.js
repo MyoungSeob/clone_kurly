@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import FooterLeft from './FooterLeft';
 import FooterRight from './FooterRight';
 
+// 생각보다 푸터의 정보가 많아서, FooterLeft와 FooterRight로 나누어 구성했습니다.
+
 const Footer = (props) => {
   return (
     <React.Fragment>

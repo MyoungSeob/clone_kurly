@@ -5,6 +5,8 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
+// 아직 구현하지 못한 컴포넌트입니다...ㅠㅠ CardList와 똑같은 형태로 하려고 하였습니다.
+
 const CardListAl = (props) => {
 
   const settings = {

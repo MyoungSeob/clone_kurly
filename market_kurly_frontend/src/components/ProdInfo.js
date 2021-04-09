@@ -14,6 +14,8 @@ const ProdInfo =(props)=>{
     const _id = props.id;
     const has_token = localStorage.getItem("X-AUTH-TOKEN")
     console.log(_id)
+
+    // 버튼을 눌렀을 때, 숫자의 증감을 표현해주는 함수들입니다.
     const plus = () => {
         setNumber(number + 1);
     }
@@ -25,11 +27,13 @@ const ProdInfo =(props)=>{
     const {contactant, expiration_date, extended_infos, guides} = props;
     
     const regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi
+    // 화폐단위를 표현하기 위한 코드입니다.
    
     function addCart() {
       dispatch(prodActions.postProdsDB(_id, number))
     }
-   
+    // 장바구니 추가버튼을 누르게 되었을 때, ProdDetail을 통하여 받아오는 정보의 값인 id와 number를 이용하여 현제 
+    // 상세페이지의 id값과 number값을 리덕스의 postProdsDB로 보내는 함수입니다.
 
     return (
       <React.Fragment>
@@ -119,7 +123,7 @@ const ProdInfo =(props)=>{
                   <Text width="420px" color="#333">
                     {props.packing_type_text}
                   </Text>
-                  {/* <Text color="#666" size="12px">택배배송은 에코포장이 스티로폼으로 대체됩니다.</Text> */}
+                  {/* 삼항연산자를 이용하여 서버에서 받은 정보들 중 값이 없다면 화면에 표시하지 않고, 있다면 표시할 수 있도록 하였습니다. */}
                 </Grid>
               </Grid>
               {contactant ? (

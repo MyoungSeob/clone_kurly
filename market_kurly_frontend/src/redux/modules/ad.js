@@ -1,3 +1,5 @@
+// 광고목록 불러오기 모듈
+
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
 

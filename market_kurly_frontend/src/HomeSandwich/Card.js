@@ -6,8 +6,8 @@ import styled from 'styled-components'
 
 
 const Card = (props) => {
-  // const { src, title, sales, price_origin, price_sell } = props;
-
+  
+  // CardList에서 map을 통하여 들어오는 정보들을 props로 이용하여 나타낼 수 있도록 하였습니다.
   return (
     <React.Fragment>
       <CardBody>

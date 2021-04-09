@@ -20,15 +20,19 @@ const SignUp = (props) => {
         if(pwd !== check_pwd){
             window.alert("비밀번호와 재입력된 비밀번호가 다릅니다.")
             return;
+            // 회원가입 시 사용자들의 입력이 올바르지 않을 시 alert를 띄워 줍니다.
         }
         dispatch(userActions.signupDB(id, pwd, name));
+        // signupDB에 회원가입 시 입력한 id, pwd, name을 보내줍니다.
         console.log(name)
     }
     function check () {
+      // 아이디 중복체크를 위한 함수입니다.
       fetch('http://15.165.205.40/api/signup/checkid', {
           method : "POST",
           body : JSON.stringify({
             username : id,
+            // 서버에 id값만 보낼 때, 서버에서는 같은 id가 DB에 있는지를 확인합니다.
           }),
           headers : {
             'Content-Type' : 'application/json',
@@ -38,6 +42,8 @@ const SignUp = (props) => {
       .then(res => res.json())
       .then(res => {
         if(res.ok){
+          // 백엔드와 협의하여 res.ok가 true냐 false냐에 따라 다른 msg값을 보내주는데, 
+          // 이 값을 보여주기 위한 조건문입니다.
           window.alert(res.msg)
         }else{
           window.alert(res.msg)

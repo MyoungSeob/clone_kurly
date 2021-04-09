@@ -44,7 +44,8 @@ const CardList = (props) => {
       </Title>
       <List>
         <StyledSlider {...settings}>        
-          {/* <Card /> */}
+          {/* map함수를 이용하여 카드의 key에 id값을 하나하나 넣고 그 값들을 표현하였습니다.
+          또한 div elements인 Grid에도 map을 이용하여 각각의 주소값을 가질 수 있도록 하였습니다. */}
           {card_list.map((c, idx) => {
             return (
               <Grid

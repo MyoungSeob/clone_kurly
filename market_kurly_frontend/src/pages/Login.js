@@ -21,14 +21,17 @@ const Login = (props) => {
 
     const [id, setId] = React.useState("");
     const [pwd, setPwd] = React.useState("");
+    // useState를 이용하여 바뀐 아이디와 비밀번호의 값을 redux로 보내줄 준비를 합니다.
 
     const login = () => {
         // console.log(getCookie('user_id'))
         if(id === "" || pwd ==="") {
             window.alert("아이디와 비밀번호를 입력해주세요.")
+            // 아이디와 비밀번호의 입력창이 공백이라면 alert를 띄웁니다.
             return;
         }else{
         dispatch(userActions.loginDB(id, pwd));}
+        // redux의 loginDB에 id, pwd를 보내줍니다.
         // history.push('/')
 
     }

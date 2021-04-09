@@ -17,28 +17,36 @@ const Header = (props) => {
 
     const has_token = localStorage.getItem("X-AUTH-TOKEN")
 
+
+    // 로그아웃 버튼을 누르면, 로컬스토리지에 들어가있던 정보들이 장바구니 전용DB로 들어가게 해주는 함수입니다.
     function logout(){
         fetch("http://15.165.205.40/api/carts/products", {
             method : "PUT",
             headers : {
                 "X-AUTH-TOKEN" : localStorage.getItem("X-AUTH-TOKEN"),
+                // 저희 조 백엔드 분들과 정한 토큰 이름입니다! fetch의 headers에 넣어서 보내기로 해서, 
+                // 로그인시 받은 토큰을 서버로 보내 사용자 인증을 합니다!
                 'Content-Type' : 'application/json',
+                // 저희가 보내는 정보들의 타입은 json타입이라는 함수입니다.
             },
             body : localStorage.getItem("cart"),
+            // 로컬 스토리지에 저장되어 있는 cart라는 토큰값을 서버로 보내고, 서버에서는 그 값을 통해 
+            // 장바구니 DB의 값을 수정합니다.
         })
         .then(res => console.log(res))
-
         localStorage.clear()       
+        // 로그아웃 이후 로컬스토리지의 모든 토큰들을 삭제하여, 장바구니 DB와 로컬스토리지의 값이 다르지 않도록 하였습니다.
         history.replace('/')
-        
     }
 
     function pushCart() {
         history.push('/cart');
         window.location.reload()
+        // pushCart는 화면의 값과 로컬스토리지의 값이 다르게 보일 때를 방지하여 이동 후 새로고침하도록 하였습니다.
     }
 
     if(has_token){
+        // 서버에서 로그인 시 준 X-AUTH-TOKEN의 유무로 헤더를 분기하여 로그인 했을 때와 하지 않았을 때를 구분지어 보여주는 조건문입니다.
         return ( 
             <React.Fragment>
                 <Grid width="1035px" height="160px" margin="auto">
