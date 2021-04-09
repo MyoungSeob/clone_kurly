@@ -22,6 +22,7 @@ export const loadAdDB = () => {
     fetch("http://15.165.205.40/api/commercials")
     .then((res) => res.json())
     .then((res) => {
+        // fetch의 GET은 따로 method가 필요하지 않습니다.
         const results = res.results;
 
         let ad_list = [];
@@ -37,6 +38,7 @@ export const loadAdDB = () => {
             }
             ad_list.push(ad)
         })
+        // forEach를 돌려주어 loadAdDB를 이용하는 친구들에게 id와 img데이터를 객체형태로 보냅니다.
         console.log(ad_list)
         dispatch(setAd(ad_list));            
         });

@@ -25,22 +25,17 @@ const CartListProduct = (props) => {
 
         console.log(cart_cart)
         console.log(typeof(cart_cart))
-
-        // localStorage.removeItem("cart")
-        // cart_nn.push(cart_info)
         let num = parseInt(number) + 1;
         setNumber(num);
-        // localStorage.setItem("cart_", JSON.stringify(cart_info))
-        // const aaaa = localStorage.getItem("cart_")
-        // console.log(JSON.stringify(aaaa))
-        // cart_nn.push(cart_info)
 
         for (var i = 0; i < cart_cart.length; i++)
         {
           if (cart_cart[i]["id"] == _id) {
             cart_cart[i]["nums"] = num;
-           
-          }
+            // cart_cart라는 cart토큰의 객체에, 바뀐 nums의 값을 해당 아이디에 올바르게 수정하게 만드는 조건문과 함수입니다.
+            // 이를 통하여 다른 목록의 수를 추가하지 않아도 localStorage에는 원하는 부분의 nums만 수정할 수 있습니다.
+        }
+
         }
         localStorage.setItem("cart", JSON.stringify(cart_cart))
     }

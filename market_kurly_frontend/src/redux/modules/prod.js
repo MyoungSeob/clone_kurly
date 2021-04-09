@@ -15,7 +15,7 @@ const initialState = {
 export const loadProdDB = (id) => {
 
     return function (dispatch, getState, {history}){
-
+        // 장바구니의 제품 이미지, 제품명, 가격 등을 가져오는 redux입니다.
         fetch(`http://15.165.205.40/api/products/${id}`)
             .then((res) => res.json())
             .then((res) => { 

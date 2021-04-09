@@ -48,6 +48,7 @@ export const loadCardDB = () => {
                         discount_percent: _card.discount_percent,
                         main_image_url: _card.main_image_url,
                     };
+                   // forEach를 돌려주어 loadCardDB를 이용하는 친구들에게 id와 img데이터를 객체형태로 보냅니다. 
                     card_list.push(card);
                 });
                 dispatch(setCard(card_list));                
